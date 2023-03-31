@@ -5,6 +5,7 @@ class Query:
     def __init__(self, query):
         self.type = query[0]
         self.number = int(query[1])
+        self.name = None
         if self.type == 'add':
             self.name = query[2]
 

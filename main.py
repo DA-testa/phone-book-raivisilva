@@ -10,19 +10,18 @@ class Query:
 
 def read_queries():
     n = int(input())
-    return [Query(input().split()) for i in range(n)]
+    return [Query(input().strip().split()) for i in range(n)]
 
 def write_responses(result):
-    print('\n'.join(result))
+    print('\n'.join(result).strip())
 
 def process_queries(queries):
     result = []
-    # Keep list of all existing (i.e. not deleted yet) contacts.
+    # Keep a dictionary of all existing (i.e. not deleted yet) contacts.
     contacts = {}
     for cur_query in queries:
         if cur_query.type == 'add':
-            # if we already have contact with such number,
-            # we should rewrite contact's name
+            contact[cur_query.number] = cur_query.name
             for contact in contacts:
                 if contact.number == cur_query.number:
                     contact.name = cur_query.name

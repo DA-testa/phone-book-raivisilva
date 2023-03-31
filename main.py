@@ -8,6 +8,7 @@ class Query:
         self.name = None
         if self.type == 'add':
             self.name = query[2]
+        assert 0 <= self.number <= 9999999
 
 def read_queries():
     n = int(input())

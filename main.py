@@ -22,18 +22,11 @@ def process_queries(queries):
 
     for cur_query in queries:
         if cur_query.type == 'add':
-            contact[cur_query.number] = cur_query.name
+            contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
-            for j in range(len(contacts)):
-                if contacts[j].number == cur_query.number:
-                    contacts.pop(j)
-                    break
+            contacts.pop(cur_query.number, None)
         else:
-            response = 'not found'
-            for contact in contacts:
-                if contact.number == cur_query.number:
-                    response = contact.name
-                    break
+            response = contacts.get(cur_query.number, 'not found')
             result.append(response)
     return result
 

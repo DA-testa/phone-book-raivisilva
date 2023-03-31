@@ -1,3 +1,4 @@
+# Raivis Ilva 221RDB403 
 # python3
 
 class Query:
@@ -17,7 +18,7 @@ def write_responses(result):
 def process_queries(queries):
     result = []
     # Keep list of all existing (i.e. not deleted yet) contacts.
-    contacts = []
+    contacts = {}
     for cur_query in queries:
         if cur_query.type == 'add':
             # if we already have contact with such number,
@@ -44,5 +45,3 @@ def process_queries(queries):
 
 if __name__ == '__main__':
     write_responses(process_queries(read_queries()))
-
-#hmm

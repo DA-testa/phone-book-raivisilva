@@ -24,8 +24,7 @@ def process_queries(queries):
 
     for cur_query in queries:
         if cur_query.type == 'add':
-            assert 1 <= cur_query.number <= 10**7
-            assert 1 <= len(cur_query.name) <= 15
+            assert 1 <= cur_query.number <= 10**7 and len(cur_query.name) <= 15
             contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
             assert 1 <= cur_query.number <= 10**7

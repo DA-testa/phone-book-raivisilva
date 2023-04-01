@@ -1,4 +1,4 @@
-# Raivis Ilva 221rdb403
+# Raivis Ilva 221rdb403 13.GRUPA
 import re
 import sys
 

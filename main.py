@@ -1,5 +1,6 @@
 # Raivis Ilva 221rdb403
 import re
+import sys
 
 class Query:
     def __init__(self, query):
@@ -14,7 +15,7 @@ class Query:
 
 
 def read_queries():
-    n = int(input())
+    n = int(sys.stdin.readline())
     queries = []
     for i in range(n):
         query = input().strip().split()
@@ -36,8 +37,7 @@ def process_queries(queries):
         if query.type == 'add':
             phoneBook[query.number] = query.name
         elif query.type == 'del':
-            if query.number in phoneBook:
-                del phoneBook[query.number]
+            phoneBook.pop(query.number, None)
         else:
             name = phoneBook.get(query.number, "not found")
             result.append(name)

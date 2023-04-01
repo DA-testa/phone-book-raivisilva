@@ -1,6 +1,3 @@
-# Raivis Ilva 221RDB403 
-# python3
-
 class Query:
     def __init__(self, query):
         self.type = query[0]
@@ -11,21 +8,32 @@ class Query:
 
 def read_queries():
     n = int(input())
-    assert 1 <= n <= 10**5, "Invalid number of queries"
+    if n < 1 or n > 10**5:
+        raise ValueError("Invalid number of queries.")
     queries = []
     for i in range(n):
         query = input().strip().split()
-        assert len(query) in [2, 3], "Invalid query format"
         if query[0] == 'add':
-            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
-            assert len(query[2]) <= 15 and query[2].isalpha(), "Invalid name"
+            if len(query) != 3:
+                raise ValueError("Invalid query format.")
+            if not query[1].isdigit() or len(query[1]) > 7 or query[1][0] == '0':
+                raise ValueError("Invalid phone number.")
+            if not query[2].isalpha() or len(query[2]) > 15:
+                raise ValueError("Invalid name.")
+        elif query[0] == 'find':
+            if len(query) != 2:
+                raise ValueError("Invalid query format.")
+            if not query[1].isdigit() or len(query[1]) > 7 or query[1][0] == '0':
+                raise ValueError("Invalid phone number.")
         elif query[0] == 'del':
-            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
+            if len(query) != 2:
+                raise ValueError("Invalid query format.")
+            if not query[1].isdigit() or len(query[1]) > 7 or query[1][0] == '0':
+                raise ValueError("Invalid phone number.")
         else:
-            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
-            queries.append(Query(query))
+            raise ValueError("Invalid query type.")
+        queries.append(Query(query))
     return queries
-    #return [Query(input().strip().split()) for i in range(n)]
 
 def write_responses(result):
     print('\n'.join(result).strip())
@@ -33,8 +41,6 @@ def write_responses(result):
 def process_queries(queries):
     contacts = {}
     result = []
-    # Keep a dictionary of all existing (i.e. not deleted yet) contacts.
-
     for cur_query in queries:
         if cur_query.type == 'add':
             contacts[cur_query.number] = cur_query.name
@@ -48,6 +54,11 @@ def process_queries(queries):
                 result.append('not found')
     return result
 
-
 if __name__ == '__main__':
-    write_responses(process_queries(read_queries()))
+    try:
+        queries = read_queries()
+        write_responses(process_queries(queries))
+    except ValueError as e:
+        print("Error:", e)
+
+

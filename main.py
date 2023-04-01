@@ -23,7 +23,12 @@ def process_queries(queries):
 
     for cur_query in queries:
         if cur_query.type == 'add':
-            assert 1 <= cur_query.number <= 10**7 and len(cur_query.name) <= 15 and not cur_query.number.startswith('0')
+            if len(cur_query.number) > 7 or cur_query.number.startswith('0'):
+                continue
+            if not all(c.isnumeric() for c in cur_query.number):
+                continue
+            if not all(c.isalpha() for c in cur_query.name) or len(cur_query.name) > 15:
+                continue
             contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
             contacts.pop(cur_query.number, None)

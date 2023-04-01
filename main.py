@@ -20,12 +20,12 @@ def read_queries():
         query = input().strip().split()
         if len(query) == 2 and query[0] == "find":
             queries.append(Query(query))
-        elif len(query) == 3 and query[0] == "add" and query[1].isdigit() and len(query[1]) <= 7 and len(query[2]) <= 15 and query[2].isalpha():
+        elif len(query) == 3 and query[0] == "add" and query[1].isdigit() and query[2].isalpha() and len(query[1]) <= 7 and len(query[2]) <= 15:
             queries.append(Query(query))
         elif len(query) == 2 and query[0] == "del" and query[1].isdigit() and len(query[1]) <= 7:
             queries.append(Query(query))
         else:
-            raise ValueError("Wrong format")
+            raise ValueError("Invalid format")
     return queries
 
 

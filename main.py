@@ -1,4 +1,5 @@
-#kapec neiet?
+import re
+
 class Query:
     def __init__(self, query):
         self.type = query[0]
@@ -12,13 +13,15 @@ class Query:
 
 
 def read_queries():
-    n = int(input())
+    n = int(input().strip())
+    if not 1 <= n <= 10**5:
+        raise ValueError("Invalid value of N")
     queries = []
     for i in range(n):
-        query = input().strip().split()
-        if query[0] == 'find' or query[0] == 'del':
-            query.append(None)
-        queries.append(Query(query))
+        query = input().strip()
+        if not re.match(r"(add|del|find) \d{1,7} [a-zA-Z]{1,15}", query):
+            raise ValueError("Invalid query format")
+        queries.append(Query(query.split()))
     return queries
 
 def write_responses(result):

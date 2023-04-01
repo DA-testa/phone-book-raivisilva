@@ -11,7 +11,21 @@ class Query:
 
 def read_queries():
     n = int(input())
-    return [Query(input().strip().split()) for i in range(n)]
+    assert 1 <= n <= 10**5, "Invalid number of queries"
+    queries = []
+    for i in range(n):
+        query = input().strip().split()
+        assert len(query) in [2, 3], "Invalid query format"
+        if query[0] == 'add':
+            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
+            assert len(query[2]) <= 15 and query[2].isalpha(), "Invalid name"
+        elif query[0] == 'del':
+            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
+        else:
+            assert len(query[1]) <= 7 and query[1].isdigit(), "Invalid phone number"
+            queries.append(Query(query))
+    return queries
+    #return [Query(input().strip().split()) for i in range(n)]
 
 def write_responses(result):
     print('\n'.join(result).strip())

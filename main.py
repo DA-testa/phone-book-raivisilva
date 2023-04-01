@@ -2,6 +2,7 @@
 import re
 import sys
 
+
 class Query:
     def __init__(self, query):
         self.type = query[0]
